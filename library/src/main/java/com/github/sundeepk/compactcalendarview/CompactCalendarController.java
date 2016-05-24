@@ -857,8 +857,27 @@ class CompactCalendarController {
                         ) {
                     drawCircle(canvas, xPosition, yPosition, currentSelectedDayBackgroundColor);
                 }
+                //set day Color Black
+                dayPaint.setColor(0xFF000000);
                 if (day <= monthToDrawCalender.getActualMaximum(Calendar.DAY_OF_MONTH) && day > 0) {
                     canvas.drawText(String.valueOf(day), xPosition, yPosition, dayPaint);
+                }
+                //Showing the Previous Month's Day
+                 else if (day <= 0) {
+                    int D;
+                    setCalenderToFirstDayOfMonth(calendarWithFirstDayOfPrevMonth, currentDate, -monthsScrolledSoFar, -1);
+                    dayPaint.setColor(0xFFC1C1C1);
+                    D =  calendarWithFirstDayOfPrevMonth.getActualMaximum(Calendar.DAY_OF_MONTH) +day;
+                    canvas.drawText(String.valueOf(D), xPosition, yPosition, dayPaint);
+
+
+                }
+                //Showing the Next Month's Day
+                else if (day>monthToDrawCalender.getActualMaximum(Calendar.DAY_OF_MONTH))
+                {  int D;
+                    D =day- monthToDrawCalender.getActualMaximum(Calendar.DAY_OF_MONTH);
+                    dayPaint.setColor(0xFFC1C1C1);
+                    canvas.drawText(String.valueOf(D), xPosition, yPosition, dayPaint);
                 }
             }
         }
